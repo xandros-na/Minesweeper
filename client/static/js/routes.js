@@ -8,11 +8,16 @@ angular.module("minesweeper").config(function ($stateProvider, $urlRouterProvide
         controller: 'MainCtrl',
         templateUrl: '/views/home.html'
     })
-    .state('play', {
+    .state('/lobby', {
+        url: '/lobby',
+        controller: 'LobbyCtrl',
+        templateUrl: '/views/lobby.html'
+    })
+    .state('/play', {
         url: '/play',
-        controller: 'MainCtrl',
+        controller: 'GameCtrl',
         templateUrl: '/views/game.html'
-    });
+    })
 
     //removes # in "/#/<url>"                
     $locationProvider.html5Mode(true);

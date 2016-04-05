@@ -28,7 +28,6 @@ http.listen(server_port, function() {
 });
 */
 
-
 http.listen(server_port, server_ip_address, function() {
     console.log('server started ' + server_port);
 });
