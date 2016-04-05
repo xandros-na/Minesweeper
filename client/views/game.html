@@ -12,7 +12,7 @@
     $("#myCanvas").hide();
 
 	var view;
-    var socket = io({secure: true});
+    var socket = io();
         var myName = "";
         socket.on('yourName', function(name) {
             myName = name;
