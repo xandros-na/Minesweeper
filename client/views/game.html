@@ -12,10 +12,7 @@
     $("#myCanvas").hide();
 
 	var view;
-    try {
-    var socket = io();
-    } catch (e) {
-    }
+    var socket = io('wss://minesweeper-cp467.rhcloud.com:8443');
         var myName = "";
         socket.on('yourName', function(name) {
             myName = name;
