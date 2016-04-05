@@ -9,6 +9,11 @@ img {
     height: 82px;
 }
 
+img.fourbythree {
+    width: 150px;
+    height: 100px;
+}
+
 .no-margin {
     margin: 0;
 }

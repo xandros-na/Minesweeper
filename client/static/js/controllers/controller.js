@@ -22,7 +22,13 @@ angular.module("minesweeper")
                 {'username': $scope.sUsername,
                  'password': $scope.sPassword})
                 .then(function(res) {
-                    console.log(res);
+                    if (res.status == 200) {
+                        alert("Successfully created account as " + $scope.sUsername);
+                        $scope.lUsername = $scope.sUsername;
+                        $scope.lPassword = $scope.sPassword;
+                        $scope.sUsername = "";
+                        $scope.sPassword = "";
+                    }
                 }, function(err) {
                     alert(err.data);
                 });
