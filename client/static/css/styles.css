@@ -1,0 +1,247 @@
+html, body {
+    font-family: "Fira Sans", sans-serif;
+    color: #333;
+    margin: 0;
+}
+
+img {
+    width: 82px;
+    height: 82px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.row {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.row-full {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.north {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.center {
+    width: 60%;
+    float: left;
+    margin: 0 2% 0 2%;
+}
+
+.east, .west {
+    width: 18%;
+    float: left;
+    margin: 0;
+}
+
+.south {
+    text-align: center;
+    width: 100%;
+    clear: both;
+    padding: 48px 0px 16px 0px;
+}
+
+
+.wide {
+    display: table;
+    margin: 0 auto;
+}
+
+h5 {
+    margin: 0;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+}
+
+#bookshelf, #result, #error, button#edit, #originalJSON {
+    visibility: hidden;
+}
+
+#error > h4 {
+    color: red;
+}
+
+#bookshelfHeaders {
+    background-color: #E0E0E0;
+}
+
+.times {
+    height: 100px;
+    vertical-align: top;
+}
+
+.start30 {
+    vertical-align: bottom;
+}
+
+th, td {
+    padding: 8px;
+}
+
+td.numbers {
+    min-width: 120px;
+    text-align: right;
+}
+
+a, ol >li, ul> li, ul > li> a, ul.link-list > li > a {
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+a, ul > li > a, ul.link-list > li > a {
+    color: #3d5afe;
+}
+
+a:hover, ul > li> a:hover, ul.link-list > li > a:hover {
+    text-decoration: underline;
+}
+
+ul.link-list > li {
+    margin-left: 48px;
+}
+
+.question-header {
+    margin: 2px;
+}
+
+.conclusion {
+    max-width: 690px;
+    margin: 0 auto;
+    padding-bottom: 48px;
+}
+
+footer {
+    padding: 48px 0 8px 0;
+    text-align: center;
+}
+
+footer > * {
+    padding: 0 12px 0 12px;
+}
+
+button {
+    background-color: #43A047;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    font-size: 16px;
+    min-width: 98px;
+    outline: none;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 12px;
+}
+
+label, input.text {
+    display: inline-block;
+    min-width: 160px;
+}
+
+input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-group {
+    margin: 16px 0 0 16px;
+}
+
+p.course-descr {
+    max-width: 830px;
+}
+
+.content {
+    margin-left: 3%;
+}
+
+.sub {
+    font-weight: normal;
+}
+
+form {
+    padding: 16px;
+}
+
+.form-title {
+    padding-left: 32px;
+    margin: 0;
+}
+
+.form-subtitle {
+    padding-left: 16px;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.half {
+    display: block;
+}
+
+.half-always {
+    width: 50%;
+    float: left;
+    display: inline-block;
+}
+
+.half > ul, .half > ol, .row-full > ul {
+    text-align: left;
+}
+
+@media (max-width: 1200px) {
+    .east, .west {
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .half {
+        width: 50%;
+        float: left;
+        display: inline-block;
+    }
+
+    .west > .half >ol, 
+    .west > .half >ul, 
+    .east > .row-full >ol, 
+    .east > .row-full >ul {
+        max-width: 125px;
+        margin: auto;
+    }
+
+    .center {
+        width: 100%;
+        margin: 0;
+        padding: 64px 0 64px 0;
+    }
+
+    .center > table {
+        margin: auto;
+    }
+}
+
+@media (max-width: 816px) {
+    footer > * {
+        display: block;
+    }
+}

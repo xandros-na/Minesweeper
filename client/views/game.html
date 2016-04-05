@@ -1,0 +1,59 @@
+<div>
+<div>
+<canvas id="myCanvas"></canvas>
+</div>
+<button id="join">Join</button>
+<h4 id="value"></h4>
+<h4 id="turn"></h4>
+<h4 id="time"></h4>
+<h4 style="color: #ff3b30" id="p1">Your Score: 0</h4>
+<h4 style="color: #007aff" id="p2">Player 2 Score: 0</h4>
+    <script>
+    $("#myCanvas").hide();
+
+	var view;
+        var socket = io();
+        var myName = "";
+        socket.on('yourName', function(name) {
+            myName = name;
+        });
+
+        $('#join').on('click', function() {
+                socket.emit('joinQueue', myName);
+        });
+           
+        socket.on('ready', function(msg) {
+                $("#myCanvas").show();
+	        	$("#join").hide();
+
+		        view = new MinesweeperView(document.getElementById("myCanvas"));
+            document.getElementById("myCanvas").
+                addEventListener('mousedown', function(event){
+                    var turn = view.getSquare(event.pageX, event.pageY);
+		            socket.emit("turn", turn);
+		    }, false);
+        });
+
+     	socket.on('turn', function(v) {
+                var squares = v.squares;
+                var turn = v.currentlyPlaying == myName;
+                for(var s=0; s<squares.length; s++) {
+                    view.setSquare({y: squares[s].row*30, x:squares[s].col*30}, squares[s].value, turn);
+                }
+                
+                if (v.players[0] == myName) {
+                    $("#p1").text("Your score: " + v.scores[0]);
+                    $("#p2").text("Player 2 score: " + v.scores[1]);
+                } 
+                if (v.players[1] == myName) {
+                    $("#p1").text("Your score: " + v.scores[1]);
+                    $("#p2").text("Player 2 score: " + v.scores[0]);
+                }
+        });
+
+        socket.on('timeout', function(v) {
+                v.time == 0 ? $('#time').text("Player 2s turn!") : $('#time').text("Time remaining: " + v.time);
+        });
+        
+    </script>
+</div>

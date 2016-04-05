@@ -1,35 +1,22 @@
 {
-  "name": "OpenShift-Sample-App",
-  "version": "1.0.0",
-  "description": "OpenShift Sample Application",
-  "keywords": [
-    "OpenShift",
-    "Node.js",
-    "application",
-    "openshift"
-  ],
-  "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+  "name": "minesweeper",
+  "version": "0.0.1",
+  "description": "1v1 minesweeper",
+  "main": "server.js",
+  "scripts": {
+    "start": "supervisor server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "http://www.openshift.com/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/openshift/origin-server"
-  },
-
-  "engines": {
-    "node": ">= 0.6.0",
-    "npm": ">= 1.0.0"
-  },
-
+  "author": "Don Miguel, Andy Guo, Nick Hare",
+  "license": "MIT",
   "dependencies": {
-    "express": "~3.4.4"
-  },
-  "devDependencies": {},
-  "bundleDependencies": [],
-
-  "private": true,
-  "main": "server.js"
+    "angular-resource": "^1.5.3",
+    "angular-ui-router": "^0.2.18",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mysql": "^2.10.2",
+    "shortid": "^2.2.4",
+    "socket.io": "^1.4.5"
+  }
 }
