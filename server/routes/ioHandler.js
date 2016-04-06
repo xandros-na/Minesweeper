@@ -4,6 +4,7 @@ var ioHandler = {};
 var queue = [];
 var rooms = [];
 var games = [];
+var lobbyPlayers = 0;
 
 var pair = function(io, room) {
     var p1 = queue[0];
@@ -33,6 +34,8 @@ var pair = function(io, room) {
     queue.splice(0, 2);
     console.log("ready ");
     console.log("players waiting: ", queue.length);
+    lobbyPlayers = lobbyPlayers-2;
+    io.sockets.emit('lobby', lobbyPlayers + " playres are sitting in the main lobby");
         
 };
 
@@ -62,10 +65,27 @@ ioHandler.handler = function(socket) {
     var newUser = shortid.generate();
     ioHandler.io.to(socket.id).emit('yourName', newUser);
     console.log(newUser, " has joined the main lobby");
+    lobbyPlayers++;
+    ioHandler.io.sockets.emit('lobby', lobbyPlayers + " players are sitting in the main lobby");
     
+    socket.on('lobby', function() {
+        ioHandler.io.sockets.emit('lobby', lobbyPlayers + " players are sitting in the main lobby");
+    });
+
     socket.on('joinQueue', function(user) {
         queue.push({'socket':socket, 'alias':newUser});
         console.log(user, " has joined the queue")
+    });
+    
+    socket.on('quit', function() {
+        var g = inGame(socket.id);
+        if (g.game.players[0] === socket.id) {
+            ioHandler.io.to(g.game.players[1]).emit('quit', 'The other player has quit');
+        } 
+        if (g.game.players[1] === socket.id) {
+            ioHandler.io.to(g.game.players[0]).emit('quit', 'The other player has quit');
+        } 
+        lobbyPlayers = lobbyPlayers + 2;
     });
 
 
@@ -99,17 +119,6 @@ ioHandler.handler = function(socket) {
 		    }	
                    
                 } else {
-                    //game.stopInterval(function(n, turn) {
-                    //    if (0 === turn) {
-                    //        ioHandler.io.to(socket.id).emit('timeout', {'time': n});
-                    //    } else if (1 === turn) {
-                    //        ioHandler.io.to(socket.id).emit('timeout', {'time': n});
-                    //    }
-                    //    if (n==0) {
-                    //        game.swapTurn();
-                    //        game.timeLeft = 29;
-                    //    }
-                    //});
                 }
                 // if timeout reaches 0 figure swap turns
 
@@ -124,6 +133,8 @@ ioHandler.handler = function(socket) {
 
     socket.on('disconnect', function(){
         console.log('dc');
+        lobbyPlayers--;
+        ioHandler.io.sockets.emit('lobby', lobbyPlayers + " players are sitting in the main lobby");
     });
 
 };

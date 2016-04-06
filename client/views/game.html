@@ -1,12 +1,11 @@
-<div>
-<div id="canvasWrapper">
-<canvas id="myCanvas"></canvas>
+<div class="row">
+    <canvas id="myCanvas"></canvas>
 </div>
-<h4 id="value"></h4>
-<h4 id="turn"></h4>
-<h4 id="time">Time remaining: {{time}}</h4>
-<h4 style="color: #2899e1" id="p1">Your Score: {{p1Score}}</h4>
-<h4 style="color: #dd5353" id="p2">Player 2 Score: {{p2Score}}</h4>
-    <script>
-    </script>
+<div class="row" style="vertical-align: top">
+    <h4 id="value">{{winner}}</h4>
+    <h4 id="turn"></h4>
+    <h4 id="time">Time remaining: {{time}}</h4>
+    <h4 style="color: #2899e1" id="p1">Your Score: {{p1Score}}</h4>
+    <h4 style="color: #dd5353" id="p2">Player 2 Score: {{p2Score}}</h4>
+    <button style="background-color: #009688" type="button" ng-click="quit()">Quit game</button>
 </div>

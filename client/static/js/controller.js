@@ -66,8 +66,15 @@ angular.module("minesweeper")
         Socket.init()
         var socket = Socket.getSocket();
 
+        $scope.lobby = "";
         socket.on("yourName", function(name) {
             Socket.setName(name);
+        });
+
+        socket.on("lobby", function(lobby) {
+            console.log(lobby);
+            $scope.lobby = lobby;
+            $scope.$apply();
         });
 
         $scope.join = function() {
@@ -81,7 +88,7 @@ angular.module("minesweeper")
 
         console.log(socket);
     })
-    .controller("GameCtrl", function($scope, $document, Socket) {
+    .controller("GameCtrl", function($scope, $document, $state, Socket) {
             var socket = Socket.getSocket();
             var myName = Socket.getName();
 
@@ -120,5 +127,20 @@ angular.module("minesweeper")
             socket.on('timeout', function(v) {
                     v.time == 0 ? $scope.time = "Player 2s turn!" : $scope.time = v.time;
                     $scope.$apply();
+            });
+
+            $scope.quit = function() {
+                socket.emit('quit', '');
+                $state.go('/lobby');
+            };
+
+            socket.on('quit', function(d) {
+                alert(d + " we're taking you back to the main lobby");
+                socket.emit('lobby', '');
+                $state.go('/lobby');
+            });
+
+            socket.on('gg', function(d) {
+                alert(d.winner);
             });
     });
