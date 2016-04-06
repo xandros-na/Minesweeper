@@ -133,8 +133,10 @@ ioHandler.handler = function(socket) {
 
     socket.on('disconnect', function(){
         console.log('dc');
-        lobbyPlayers--;
-        ioHandler.io.sockets.emit('lobby', lobbyPlayers + " players are sitting in the main lobby");
+        if (lobbyPlayers > 0) {
+            lobbyPlayers--;
+            ioHandler.io.sockets.emit('lobby', lobbyPlayers + " players are sitting in the main lobby");
+        }
     });
 
 };
