@@ -39,7 +39,8 @@ angular.module("minesweeper")
         var myName = "";
         
         var init = function() {
-            socket = io('wss://minesweeper-cp467.rhcloud.com:8443');
+            //socket = io('wss://minesweeper-cp467.rhcloud.com:8443');
+            socket = io();
         };
 
         var setName = function(name) {
