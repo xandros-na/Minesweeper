@@ -1,3 +1,8 @@
+const ROWS = 20;
+const COLS = 15;
+const MINES = 10;
+const TIME = 15;
+
 var Square = function(row, col, value, revealed){
 	this.mine = -1;
 	this.revealed = revealed
@@ -111,7 +116,7 @@ MinesweeperBoard.prototype.getDangerValue = function(i, j){
 };
 
 MinesweeperBoard.prototype.revealSquare = function(i,j){
-	console.log("rev "+ i + ", " + j);this.grid[i][j].reveal();
+	this.grid[i][j].reveal();
 };
 
 MinesweeperBoard.prototype.isRevealed = function(i,j){
@@ -248,8 +253,8 @@ var MinesweeperGame = function(room, player1, player2, a1, a2, callback){
     this.alias = [a1, a2];
 	this.playerScores = [0,0];
 	
-	this.board = new MinesweeperBoard(20,15,60);
-	this.timeLeft = 15;
+	this.board = new MinesweeperBoard(ROWS, COLS, MINES);
+	this.timeLeft = TIME;
 	
 	var me = this;
     this.timer = setInterval(function() {
@@ -285,9 +290,10 @@ MinesweeperGame.prototype.takeTurn = function(i,j){
 	if (!this.board.isRevealed(i,j)){
 		if (this.board.isMine(i,j)){
 			this.playerScores[this.turn]++;
+		    this.timeLeft = TIME;
 		}else{
 			this.swapTurn();
-		    this.timeLeft = 15;
+		    this.timeLeft = TIME;
 		}
 		return this.board.getSquareValues(i,j);
 	}
@@ -308,7 +314,6 @@ MinesweeperGame.prototype.swapTurn = function(){
 	}else if(this.turn == 1){
 		this.turn = 0;
 	}
-    console.log("Turn: "+ this.turn);
 };
 
 module.exports = MinesweeperGame;
