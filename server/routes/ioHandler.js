@@ -60,6 +60,27 @@ var inGame = function(sid) {
     return {'ingame':false, 'game':null};
 };
 
+var printBoard = function(game) {
+			for(var v = 0; v < game.board.rows; v++){
+			   var s = "...";for(var b = 0; b < game.board.cols; b++){s += (game.board.grid[v][b].value == -1)? "*":game.board.grid[v][b].value;}console.log(s);}
+};
+
+var sendDataAfterTurn = function(ioHandler, game, res) {
+    ioHandler.io.sockets.in(game.room).emit('turn', {'squares':res, 'scores':game.playerScores, 'players': game.alias, 'currentlyPlaying' : game.getTurnWithAlias()});
+};
+
+var checkWinner = function(ioHandler, game) {
+            /* check winner */
+            var winner = game.playerWon();
+            if (winner === 2) {
+                return winner; 
+           } else {
+               /* someone wins */
+               console.log("wonnered");
+               ioHandler.io.sockets.in(game.room).emit('gg', {'winner': winner});
+               return winner;
+           }
+};
 
 ioHandler.handler = function(socket) {
     var newUser = shortid.generate();
@@ -96,36 +117,23 @@ ioHandler.handler = function(socket) {
         if (g.ingame) {
             var game = g.game;
 
-            /* check winner */
-            var winner = game.playerWon();
-            if (!winner) {
-                console.log('player turn', game.getTurn());
-
                 /* check if its your turn */
-                if (game.getTurn() === socket.id) {
+                if (game.getTurn() === socket.id && checkWinner(ioHandler, game) === 2) {
                     var i = data.xcord;
                     var j = data.ycord;
                     
-		    console.log(i + ", " + j);
                     var res = game.takeTurn(i, j);
                     if (res === false) { //dumb move
-                        console.log(game.rows);console.log(data, " already 'mined'");
-			for(var v = 0; v < game.board.rows; v++){
-			   var s = "...";for(var b = 0; b < game.board.cols; b++){s += (game.board.grid[v][b].value == -1)? "*":game.board.grid[v][b].value;}console.log(s);}
+                        printBoard(game);
                     } else {
+                        sendDataAfterTurn(ioHandler, game, res);
+                        checkWinner(ioHandler, game);
 			
-				console.log({'squares':res, 'scores':game.playerScores});
-                	ioHandler.io.sockets.in(game.room).emit('turn', {'squares':res, 'scores':game.playerScores, 'players': game.alias, 'currentlyPlaying' : game.getTurnWithAlias()});
-		    }	
-                   
+		            }	
                 } else {
+                    checkWinner(ioHandler, game);
                 }
-                // if timeout reaches 0 figure swap turns
 
-            } else {
-                /* someone wins */
-                ioHandler.io.sockets.in(socket.room).emit('gg', {'winner': winner});
-            }
         } else {
             console.log('player not in game');
         }
