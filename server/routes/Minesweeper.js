@@ -272,9 +272,9 @@ MinesweeperGame.prototype.playerWon = function(){
 	if (difference > this.board.mines || this.board.mines === 1){
         clearInterval(this.timer);
 		if (this.playerScores[0] > this.playerScores[1]){
-			return this.players[0];
+			return this.alias[0];
 		}else if (this.playerScores[1] > this.playerScores[0]){
-			return this.players[1];
+			return this.alias[1];
         }
 	}else{
 		return GAMEINPROGRESS;

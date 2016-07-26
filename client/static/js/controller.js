@@ -39,7 +39,10 @@ angular.module("minesweeper")
         var myName = "";
         
         var init = function() {
+            //PRODUCTION
             //socket = io('wss://minesweeper-cp467.rhcloud.com:8443');
+
+            //LOCAL
             socket = io();
         };
 
@@ -142,6 +145,13 @@ angular.module("minesweeper")
             });
 
             socket.on('gg', function(d) {
-                alert(d.winner);
+                console.log("wonnered");
+                if (myName === d.winner) {
+                    alert("You won! We are now taking you back to the main lobby");
+                } else {
+                    alert("You lost! We are now taking you back to the main lobby");
+                }
+                socket.emit('lobby', '');
+                $state.go('/lobby');
             });
     });
