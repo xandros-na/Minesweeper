@@ -3,6 +3,7 @@ const COLS = 15;
 const MINES = 10;
 const TIME = 15;
 const GAMEINPROGRESS = 2;
+const TIE = 3;
 
 var Square = function(row, col, value, revealed){
 	this.mine = -1;
@@ -269,12 +270,14 @@ MinesweeperGame.prototype.stopInterval = function(){
 
 MinesweeperGame.prototype.playerWon = function(){
 	var difference = Math.abs(this.playerScores[0] - this.playerScores[1]);
-	if (difference > this.board.mines || this.board.mines === 1){
+	if (difference > this.board.mines || this.board.mines === 0){
         clearInterval(this.timer);
 		if (this.playerScores[0] > this.playerScores[1]){
 			return this.alias[0];
 		}else if (this.playerScores[1] > this.playerScores[0]){
 			return this.alias[1];
+        } else {
+            return TIE;
         }
 	}else{
 		return GAMEINPROGRESS;

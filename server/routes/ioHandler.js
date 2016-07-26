@@ -74,9 +74,11 @@ var checkWinner = function(ioHandler, game) {
             var winner = game.playerWon();
             if (winner === 2) {
                 return winner; 
+           } else if (winner === 3) {
+               ioHandler.io.sockets.in(game.room).emit('gg', {'winner': 'tie'});
+               return winner;
            } else {
                /* someone wins */
-               console.log("wonnered");
                ioHandler.io.sockets.in(game.room).emit('gg', {'winner': winner});
                return winner;
            }

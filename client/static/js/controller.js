@@ -40,10 +40,10 @@ angular.module("minesweeper")
         
         var init = function() {
             //PRODUCTION
-            //socket = io('wss://minesweeper-cp467.rhcloud.com:8443');
+            socket = io('wss://minesweeper-cp467.rhcloud.com:8443');
 
             //LOCAL
-            socket = io();
+            //socket = io();
         };
 
         var setName = function(name) {
@@ -148,6 +148,8 @@ angular.module("minesweeper")
                 console.log("wonnered");
                 if (myName === d.winner) {
                     alert("You won! We are now taking you back to the main lobby");
+                } else if (d.winner === 'tie') {
+                    alert("It's a tie! We are now taking you back to the main lobby");
                 } else {
                     alert("You lost! We are now taking you back to the main lobby");
                 }
