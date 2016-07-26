@@ -1,6 +1,11 @@
 ## 1v1 Minesweeper
 - A simple game created with Node.js and Socket.io for "real time" interaction between two players
 
+### Install and Run
+
+1. `npm install --save`
+2. `node server.js`
+3. Visit `localhost:8080`
 
 ### How to Play
 
