@@ -2,6 +2,7 @@ const ROWS = 20;
 const COLS = 15;
 const MINES = 10;
 const TIME = 15;
+const GAMEINPROGRESS = 2;
 
 var Square = function(row, col, value, revealed){
 	this.mine = -1;
@@ -44,7 +45,7 @@ Square.prototype.isRevealed = function(){
 
 
 var MinesweeperBoard = function(rows, cols, mines){
-	this.mines = mines
+	this.mines = mines;
 	this.rows = rows;
 	this.cols = cols;
 	
@@ -224,10 +225,6 @@ MinesweeperBoard.prototype.getSurroundingSquares = function(squares, i, j){
 	return squares;
 };
 
-MinesweeperBoard.prototype.minesLeft = function(){
-	return this.mines;
-};
-
 MinesweeperBoard.prototype.isMine = function(i, j){
 	if (i >= 0 && i < this.rows && j >= 0 && j < this.cols){
 		return this.grid[i][j].isMine();
@@ -271,18 +268,16 @@ MinesweeperGame.prototype.stopInterval = function(){
 };
 
 MinesweeperGame.prototype.playerWon = function(){
-	var difference = Math.abs(this.playerScores[0], this.playerScores[1]);
-	if (difference > this.board.minesLeft() || this.board.minesLeft() == 0){
+	var difference = Math.abs(this.playerScores[0] - this.playerScores[1]);
+	if (difference > this.board.mines || this.board.mines === 1){
         clearInterval(this.timer);
 		if (this.playerScores[0] > this.playerScores[1]){
-			return players[0];
+			return this.players[0];
 		}else if (this.playerScores[1] > this.playerScores[0]){
-			return players[1];
-		}else{
-			return true;
-		}
+			return this.players[1];
+        }
 	}else{
-		return false;
+		return GAMEINPROGRESS;
 	}
 };
 
@@ -291,6 +286,7 @@ MinesweeperGame.prototype.takeTurn = function(i,j){
 		if (this.board.isMine(i,j)){
 			this.playerScores[this.turn]++;
 		    this.timeLeft = TIME;
+            this.board.mines--;
 		}else{
 			this.swapTurn();
 		    this.timeLeft = TIME;
