@@ -1,13 +1,15 @@
 angular.module("minesweeper").config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/lobby');
 
     $stateProvider
+    /*
     .state('index', {
         url: '/',
         controller: 'MainCtrl',
         templateUrl: '/views/home.html'
     })
+    */
     .state('/lobby', {
         url: '/lobby',
         controller: 'LobbyCtrl',

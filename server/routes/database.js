@@ -14,6 +14,8 @@ connection.useDefault = function() {
 connection.login = function(email, pw, cb) {
     var sql = "select password from user where email=" + connection.escape(email);
     connection.query(sql, function(err, res, fields) {
+        console.log(res);
+        console.log(err);
         if (err) return cb(err);
         if (res.length > 0) {
             bcrypt.compare(pw, res[0].password, function(err, res) {

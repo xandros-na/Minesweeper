@@ -11,7 +11,7 @@ ioHandler.io = io;
 app.use(express.static(path.join(__dirname, './client')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use('/', api);
+//app.use('/', api);
 app.use('/', function(req, res, next) {
     res.sendFile(path.join(__dirname, 'client', 'views', 'index.html'));
 });
