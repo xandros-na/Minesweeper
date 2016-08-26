@@ -1,6 +1,6 @@
 const ROWS = 20;
 const COLS = 15;
-const MINES = 50;
+const MINES = 30;
 const TIME = 15;
 const GAMEINPROGRESS = 2;
 const TIE = 3;

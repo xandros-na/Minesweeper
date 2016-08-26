@@ -1,18 +1,31 @@
 <div class="align-center">
-<div class="row">
-<img class="fourbythree" src="../static/resources/mine1v1.png"></img>
+    <div class="row">
+        <img class="fourbythree" src="../static/resources/mine1v1.png"></img>
+    </div>
+    <div class="row">
+        <h1>Welcome to 1v1 Minesweeper</h1>
+    </div>
+    <div class="row">
+        <img class="fourbythree" src="../static/resources/mine1v1.png"></img>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h4>{{lobby}}</h4>
+    <button id="join" ng-click="join()">Join a Game!</button>
+
+    <br>
+    <br>
+    <br>
+    <div class="howToPlay">
+        <h3>How to Play</h3>
+<ol>
+    <li>Click the Join button to connect to the game queue. A game needs at least two people to Play!</li>
+    <li>Once the game starts, your "mines" will be coloured <span style="color: red">Red</span> and your opponent's will be coloured <span style="color: blue">Blue</span></li>
+    <li>Each player has 15 seconds per turn. If you get a mine, the timer resets and you get to go again!</li>
+    <li>There are 30 hidden mines on the board. Collect more mines than your opponent!</li>
+</ol>
 </div>
-<div class="row">
-<h1>Welcome to 1v1 Minesweeper</h1>
-</div>
-<div class="row">
-<img class="fourbythree" src="../static/resources/mine1v1.png"></img>
-</div>
-<br>
-<br>
-<br>
-<br>
-<h4>{{lobby}}</h4>
-<button id="join" ng-click="join()">Join a Game!</button>
 </div>
 </div>

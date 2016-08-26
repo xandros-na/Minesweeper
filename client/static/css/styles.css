@@ -105,7 +105,7 @@ td.numbers {
 
 a, ol >li, ul> li, ul > li> a, ul.link-list > li > a {
     text-decoration: none;
-    line-height: 1.4;
+    line-height: 1.9;
 }
 
 a, ul > li > a, ul.link-list > li > a {
@@ -250,3 +250,14 @@ form {
         display: block;
     }
 }
+
+.howToPlay {
+    width: 62%;
+    margin: auto;
+}
+
+ol {
+    text-align: center;
+    list-style-position: inside;
+}
+
