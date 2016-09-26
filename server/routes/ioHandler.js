@@ -35,7 +35,7 @@ var pair = function(io, room) {
     console.log("ready ");
     console.log("players waiting: ", queue.length);
     lobbyPlayers = lobbyPlayers-2;
-    io.sockets.emit('lobby', lobbyPlayers + " playres are sitting in the main lobby");
+    io.sockets.emit('lobby', lobbyPlayers + " players are sitting in the main lobby");
         
 };
 
@@ -142,8 +142,9 @@ ioHandler.handler = function(socket) {
     });
 
     socket.on('disconnect', function(){
-        console.log('dc');
-        if (lobbyPlayers > 0) {
+        var g = inGame(socket.id);
+        if (!g.ingame) {
+            console.log('dc');
             lobbyPlayers--;
             ioHandler.io.sockets.emit('lobby', lobbyPlayers + " players are sitting in the main lobby");
         }
